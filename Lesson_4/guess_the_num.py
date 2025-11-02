@@ -1,15 +1,13 @@
 import random
 
-num = random.randint(1, 100)
-
-counter = 0
+random_num = random.randint(1, 100)
 
 while True:
-    guess = input("Вгадайте число, від 1 до 100:")
-    counter += 1
-    if num == int(guess):
-        print(f"Вірно. Кількість спроб: {counter}")
-    elif num > int(guess):
-        print("Більше")
-    elif num < int(guess):
-        print("Менше")
+    guess = int(input("Вгадайте число від 1 до 100: "))
+    if random_num == guess:
+        print("Ви вгадали!")
+    elif random_num > guess:
+        print("Загадане число більше.")
+    elif random_num < guess:
+        print("Загадане число менше.")
+    
