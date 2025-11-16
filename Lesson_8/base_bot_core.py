@@ -1,7 +1,7 @@
 # pip install python-telegram-bot
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 
-TOKEN = "8007498060:AAEsmpsDhAACsZKlOBkGl8ltZG5Nhg8StRs"
+TOKEN = ""
 
 async def start(update, context):
     await update.message.reply_text("Привіт! Я твій новий бот.")
