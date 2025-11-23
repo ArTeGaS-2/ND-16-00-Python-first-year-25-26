@@ -9,43 +9,42 @@ from telegram.ext import (Application,
                         filters)
 
 openai.api_key = ""
+TOKEN = ""
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """
-    Обробник команди /start.
-    Ініціалізує історію діалогу для користувача та надсилає вітальне повідомлення.
-    """
-    # Ініціалізуємо історію, додаючи системне повідомлення, яке задає тон діалогу.
-    context.user_data["history"] = [{"role": "system", "content": "You are a helpful assistant."}]
     await update.message.reply_text(
-        "Привіт! Починаємо спілкування з моделлю o4-mini від OpenAI. Напиши своє повідомлення:"
+        "Привіт! Починаємо спілкування. Напиши своє повідомлення:"
     )
 
-async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """
     Обробник текстових повідомлень.
     Додає повідомлення користувача в історію, надсилає запит до OpenAI та повертає відповідь.
     """
-    user_input = update.message.text.strip()
-    
-    # Отримуємо поточну історію діалогу або створюємо нову, якщо її немає.
-    history = context.user_data.get("history", [])
-    # Додаємо повідомлення користувача до історії.
-    history.append({"role": "user", "content": user_input})
-    
+    user_text = update.message.text
     try:
         # Асинхронно надсилаємо запит до OpenAI.
-        response = await openai.ChatCompletion.acreate(
-            model="gpt-4o-mini",
-            messages=history
+        response = openai.ChatCompletion.create(
+            model="gpt-5.1",
+            messages=[
+                {"role": "system", "content": "Ти дівчина чарівниця."},
+                {"role": "user", "content": user_text}
+            ]
         )
         # Отримуємо відповідь від моделі.
         reply = response.choices[0].message.content.strip()
-        # Додаємо відповідь моделі до історії діалогу.
-        history.append({"role": "assistant", "content": reply})
-        
-        # Надсилаємо відповідь користувачу.
-        await update.message.reply_text(reply)
     except Exception as e:
-        # У разі помилки виводимо повідомлення про помилку.
-        await update.message.reply_text(f"Виникла помилка: {e}")
+        reply = f"Виникла помилка: {e}"
+    await update.message.reply_text(reply)
+def main():
+    """Основан функція запуску боту"""
+    TOKEN = "8007498060:AAEsmpsDhAACsZKlOBkGl8ltZG5Nhg8StRs"
+    app = Application.builder().token(TOKEN).build()
+
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()
