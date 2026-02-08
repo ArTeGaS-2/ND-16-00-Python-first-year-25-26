@@ -83,4 +83,71 @@ class RegisterPage(QWidget):
         form.addRow("Пароль:", self.password_input)
         form.addRow("Повтор паролю:", self.password_repeat)
 
+        create_btn = QPushButton("Зареєструватися")
+        back_btn = QPushButton("Вхід")
+        back_btn.clicked.connect(self.go_to_login.emit)
 
+        buttons = QHBoxLayout()
+        buttons.addWidget(create_btn)
+        buttons.addWidget(back_btn)
+
+        root = QVBoxLayout()
+        root.addWidget(title)
+        root.addLayout(form)
+        root.addLayout(buttons)
+        root.addStretch(1)
+        self.setLayout(root)
+# Головне вікно, яке перемикає сторінки
+class MainWindow(QWidget):
+    def __init__(self) -> None:
+        super().__init__()
+
+        self.setWindowTitle("Auth demo (PyQt6)")
+        # Стек сторінок (показує одну з багатьох)
+        self.stack = QStackedWidget()
+        # Створюємо сторінку входу
+        self.login_page = LoginPage()
+        # Створюємо сторінку реєстрації
+        self.register_page = RegisterPage()
+        # Додаємо сторінку входу як 0-й елемент
+        self.stack.addWidget(self.login_page)
+        # Додаємо сторінку реєстрації як 1-й елемент
+        self.stack.addWidget(self.register_page)
+        
+        # Функція: показати вхід (індекс 0)
+        def open_login() -> None:
+            # Перемикаємо стек на сторінку 0
+            self.stack.setCurrentIndex(0)
+        # Функція: показати реєстрацію (індекс 1)
+        def open_register() -> None:
+            # Перемикаємо стек на сторінку 1
+            self.stack.setCurrentIndex(1)
+        # При сигналі зі сторінки входу — відкриваємо реєстрацію
+        self.login_page.go_to_register.connect(open_register)
+        # При сигналі зі сторінки реєстрації — відкриваємо вхід
+        self.register_page.go_to_login.connect(open_login)
+        # Коренева розкладка вікна
+        root = QVBoxLayout()
+        # Додаємо стек у розкладку
+        root.addWidget(self.stack)
+        # Встановлюємо розкладку для вікна
+        self.setLayout(root)
+        # Показуємо вхід за замовчуванням
+        open_login()
+        
+# Функція запуску застосунку
+def main() -> int:
+    # Створюємо QApplication
+    app = QApplication(sys.argv)
+    # Створюємо головне вікно
+    window = MainWindow()
+    # Задаємо розмір
+    window.resize(420, 220)
+    # Робимо вікно видимим
+    window.setVisible(True)
+    # Запускаємо цикл подій
+    return app.exec()
+# Якщо файл запускається напряму — стартуємо main()
+if __name__ == "__main__":
+    # Завершуємо програму з кодом, який повернула main()
+    raise SystemExit(main())
