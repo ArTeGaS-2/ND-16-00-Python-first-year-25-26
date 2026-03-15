@@ -10,10 +10,11 @@ from PyQt6.QtWidgets import (
     QVBoxLayout,
     QWidget)
 
-# Оголошуємо клас сторінки входу (окремий віджет)
 class LoginPage(QWidget):
-    # Оголошуємо власний сигнал: "хочу перейти до реєстрації"
+    # Сигнал "хочу перейти до реєстрації"
     go_to_register = pyqtSignal()
+    # Сигнал успішної автентифікації
+    auth_success = pyqtSignal()
 
     def __init__(self) -> None:
         super().__init__()
@@ -65,5 +66,6 @@ class LoginPage(QWidget):
         
         if len(login) > 1 and len(password) > 8:
             QMessageBox.information(self, "Успіх", "Вхід виконано успішно!")
+            self.auth_success.emit()
         else:
             QMessageBox.warning(self, "Помилка", "Логін має бути більше 1 символу, а пароль більше 8 символів.")
