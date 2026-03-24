@@ -11,7 +11,7 @@ def main() -> int:
     # Створюємо головне вікно
     window = MainWindow()
     # Задаємо розмір
-    window.resize(420, 220)
+    window.resize(760, 520)
     # Робимо вікно видимим
     window.setVisible(True)
     # Запускаємо цикл подій
