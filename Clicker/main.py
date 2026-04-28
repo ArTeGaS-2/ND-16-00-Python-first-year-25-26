@@ -15,12 +15,28 @@ def main():
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     clock = pygame.time.Clock()
 
+    # Шрифт, вибір з системних
+    font = pygame.font.SysFont("arial", 36)
+
+    # Завантажуємо зображення і вмикаємо прозорість
+    button_img = pygame.image.load(BUTTON_IMEGE_PATH).convert_alpha()
+    # Міняємо розмір
+    button_img = pygame.transform.scale(button_img, (200, 200))
+    # Розміщуємо прямокутник зображення по центру
+    button_rect = button_img.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+
+    clicks = 0 # Скільки кліків зроблено
+
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                clicks += 1
 
+ 
+        screen.blit(button_img, button_rect)
         screen.fill(BG_COLOR)
 
         pygame.display.flip()
