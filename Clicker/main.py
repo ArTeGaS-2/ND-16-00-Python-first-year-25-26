@@ -6,7 +6,9 @@ BG_COLOR = (20, 20, 20) # RGB колір - Червоний, Зелений, С�
 TEXT_COLOR = (255, 255, 255) # Колір тексту, теж RGB
 FPS = 60 # Кадри за секунду
 
-BUTTON_IMEGE_PATH = "button.png" # Шлях до зображення кнопки
+BUTTON_IMEGE_PATH = "Clicker/button.png" # Шлях до зображення кнопки
+BG_IMAGE_PATH = "Clicker/bg.png"
+
 TEXT_TEMPLATE = "Кліків: {}" # Шаблон тексту на екрані
 
 def main():
@@ -35,10 +37,14 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 clicks += 1
 
- 
-        screen.blit(button_img, button_rect)
         screen.fill(BG_COLOR)
+        screen.blit(button_img, button_rect)
 
+        text_str = TEXT_TEMPLATE.format(clicks)
+        text_surf = font.render(text_str, True, TEXT_COLOR)
+        text_rect = text_surf.get_rect(midtop=(WIDTH // 2, 20))
+        screen.blit(text_surf, text_rect)
+ 
         pygame.display.flip()
 
 main()
