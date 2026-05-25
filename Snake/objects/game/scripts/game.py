@@ -1,7 +1,12 @@
 import pygame
 
-from settings import BG_COLOR, CELL_SIZE
-from settings import FPS, GRID_COLOR, HEIGHT,WIDTH
+from settings import (BG_COLOR,
+                    CELL_SIZE,
+                    FPS,
+                    GRID_COLOR,
+                    HEIGHT,
+                    WIDTH,
+                    MOVE_DELAY_MS)
 
 class Game:
     def __init__(self):
@@ -32,7 +37,7 @@ class Game:
             pygame.display.flip()
     def run(self, max_frames=None):
         running = True
-
+ 
         frames = 0
         while running:
             self.clock.tick(FPS)
