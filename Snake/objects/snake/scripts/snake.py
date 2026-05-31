@@ -6,7 +6,7 @@ from settings import (
     SNAKE_COLOR,
     SNAKE_HEAD_COLOR 
 )
-
+ 
 class Snake: # Класс об'єкту змії
     def __init__(self): # Ініціалізація змії
         start_x = COLS // 2 # Початкова позиція змії по горизонталі (по центру екрану)
