@@ -18,5 +18,5 @@ class Food:
             
     def draw(self, screen):
         x, y = self.position
-        center = (x * CELL_SIZE + CELL_SIZE // 2, y * CELL_SIZE // 2 - 4)
+        center = (x * CELL_SIZE + CELL_SIZE // 2, y * CELL_SIZE + CELL_SIZE // 2 - 4)
         pygame.draw.circle(screen, FOOD_COLOR, center, CELL_SIZE // 2 - 4)

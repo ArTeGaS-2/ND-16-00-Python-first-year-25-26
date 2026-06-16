@@ -59,9 +59,10 @@ class Game:
             self.screen.fill(BG_COLOR)   # Заливаємо фон
             self.draw_grid()             # Малюємо сітку
             self.snake.draw(self.screen) # Малюємо змійку
-            self.food.draw(self.score)   # Малюємо їжу
+            self.food.draw(self.screen)   # Малюємо їжу
+            self.draw_text()             # Малюємо текст поверх гри
             
-            pygame.display.flip()        # Оновлюємо екран.
+            pygame.display.flip()        # Оновлюємо екран
 
     def run(self, max_frames=None):
         running = True
@@ -118,3 +119,16 @@ class Game:
         score_text = self.font.render(f"Рахунок: {self.score}", True, TEXT_COLOR)
         # Малюємо рахунок в лівому верхньому куті
         self.screen.blit(score_text, (16, 12))
+
+        # Текст з підказкою
+        help_text = self.font.render(f"WASD/Стрілки - рух, R - рестарт", True, TEXT_COLOR)
+        # Малюємо в лівому нижньому куті
+        self.screen.blit(help_text, (16, HEIGHT - 28))
+
+        if self.game_over: # Якщо гра завершена
+            # Текст який вказує на завершення гри
+            message = self.font.render(f"Гра зваершена. R для рестарту", True, TEXT_COLOR)
+            # Рахуємо прямокутник тексту з центром по центру екрану
+            rect = message.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+            # Малюємо повідомлення в заданій позиції
+            self.screen.blit(message, rect)
