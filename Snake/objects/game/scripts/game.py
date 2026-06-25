@@ -119,7 +119,7 @@ class Game:
         score_text = self.font.render(f"Рахунок: {self.score}", True, TEXT_COLOR)
         # Малюємо рахунок в лівому верхньому куті
         self.screen.blit(score_text, (16, 12))
-
+ 
         # Текст з підказкою
         help_text = self.font.render(f"WASD/Стрілки - рух, R - рестарт", True, TEXT_COLOR)
         # Малюємо в лівому нижньому куті
