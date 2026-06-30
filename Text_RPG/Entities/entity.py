@@ -15,3 +15,4 @@ class Entity():
         print(f"{self.name} наносить {target.name} {self.damage} шкоди")
         target.take_damage(self.damage)
 
+ 

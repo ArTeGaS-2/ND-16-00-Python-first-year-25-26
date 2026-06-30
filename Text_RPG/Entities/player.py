@@ -6,3 +6,4 @@ class Player(Entity):
         
     def spawn(self):
         print(f"Герой {self.name} з'явився у світі.")
+ 
