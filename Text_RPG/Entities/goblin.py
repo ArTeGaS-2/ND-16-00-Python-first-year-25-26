@@ -1,4 +1,4 @@
-from entity import Entity
+from Entities.entity import Entity
 
 class Goblin(Entity):
     def __init__(self, name, hp, damage):
