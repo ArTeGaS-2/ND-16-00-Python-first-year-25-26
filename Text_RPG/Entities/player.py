@@ -6,4 +6,7 @@ class Player(Entity):
         
     def spawn(self):
         print(f"Герой {self.name} з'явився у світі.")
- 
+
+    def talk_to(self, npc):
+        print(f"{self.name} Починає розмову з {npc.introduce()}")
+        npc.talk()
