@@ -15,7 +15,7 @@ class HiddenQuest:
         # Чи завершено квест
         self.is_complited = False
 
-    def try_dsicover(self, perception):
+    def try_discover(self, perception):
         # Якщо увага більша або дорівнює рівню виявлення
         if perception >= self.discovery_difficulty:
             # Квест стає виявленим
