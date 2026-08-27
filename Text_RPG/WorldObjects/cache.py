@@ -7,7 +7,7 @@ class Cache:
         self.discovery_difficeulty = discovery_difficeulty
         self.is_discovered = False # Чи виявлено
         self.is_opened = False # Чи було відкрито
-
+ 
     def try_discover(self, perception):
             # Якщо сприйняття більше або дорвнює рівню пастки
             if perception >= self.discovery_difficulty:

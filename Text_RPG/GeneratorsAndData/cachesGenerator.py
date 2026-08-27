@@ -30,3 +30,10 @@ def generate_cache(peception_lvl):
         random.randint(1,3) + peception_lvl
     )
 
+def generate_caches(perception_lvl, count):
+    caches = []
+
+    for _ in range(count):
+        caches.append(generate_cache(perception_lvl))
+
+    return caches
